@@ -1,0 +1,22 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "pwIYqGAFzTdRbqpIyvXIyBgixhuNYMET",
+    "database": "railway",
+    "host": "crossover.proxy.rlwy.net",
+    "port": 56650,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "pwIYqGAFzTdRbqpIyvXIyBgixhuNYMET",
+    "database": "railway",
+    "host": "crossover.proxy.rlwy.net",
+    "port": 56650,
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres"
+  }
+}

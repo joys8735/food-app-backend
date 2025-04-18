@@ -9,10 +9,10 @@ const app = express();
 
 app.use(cors({ 
   origin: [
-    'http://localhost:8080',    // Dev-режим фронта
-    'http://localhost:5002',    // Локальный бэкенд
-    'http://localhost:4173',    // Продакшен-режим фронта (npm run preview)
-    'https://project-burger-two.vercel.app' // Vercel-домен
+    'http://localhost:8080',
+    'http://localhost:5002',
+    'http://localhost:4173',
+    'https://project-burger-two.vercel.app'
   ] 
 }));
 app.use(express.json());

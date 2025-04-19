@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       optionGroupId: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'optionGroupId' // Явно указываем имя столбца
       },
       name: {
         type: DataTypes.STRING,

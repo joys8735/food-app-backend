@@ -23,10 +23,11 @@ router.get('/', async (req, res) => {
         include: [{ model: OptionChoice, as: 'choices', required: false }]
       }]
     });
+    console.log('Products fetched:', products.length);
     res.json(products);
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).json({ error: 'Server error' });
+    console.error('Error fetching products:', error.message, error.stack);
+    res.status(500).json({ error: 'Server error', details: error.message });
   }
 });
 
@@ -41,10 +42,11 @@ router.get('/featured', async (req, res) => {
         include: [{ model: OptionChoice, as: 'choices', required: false }]
       }]
     });
+    console.log('Featured products fetched:', products.length);
     res.json(products);
   } catch (error) {
-    console.error('Error fetching featured products:', error);
-    res.status(500).json({ error: 'Server error' });
+    console.error('Error fetching featured products:', error.message, error.stack);
+    res.status(500).json({ error: 'Server error', details: error.message });
   }
 });
 
@@ -59,10 +61,11 @@ router.get('/top', async (req, res) => {
         include: [{ model: OptionChoice, as: 'choices', required: false }]
       }]
     });
+    console.log('Top products fetched:', products.length);
     res.json(products);
   } catch (error) {
-    console.error('Error fetching top products:', error);
-    res.status(500).json({ error: 'Server error' });
+    console.error('Error fetching top products:', error.message, error.stack);
+    res.status(500).json({ error: 'Server error', details: error.message });
   }
 });
 

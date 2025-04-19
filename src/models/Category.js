@@ -1,20 +1,21 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+module.exports = (sequelize, DataTypes) => {
+  const Category = sequelize.define('Category', {
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    tableName: 'Categories',
+    timestamps: true
+  });
 
-const Category = sequelize.define('Category', {
-  id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    allowNull: false,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  image: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
-
-module.exports = Category;
+  return Category;
+};

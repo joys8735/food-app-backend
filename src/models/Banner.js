@@ -1,16 +1,18 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+module.exports = (sequelize, DataTypes) => {
+  const Banner = sequelize.define('Banner', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    tableName: 'Banners',
+    timestamps: true
+  });
 
-const Banner = sequelize.define('Banner', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  image: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
-
-module.exports = Banner;
+  return Banner;
+};

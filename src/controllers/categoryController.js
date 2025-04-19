@@ -1,11 +1,11 @@
-const Category = require('../models/Category');
+const { Category } = require('../models');
 
 exports.getCategories = async (req, res) => {
   try {
     const categories = await Category.findAll();
     res.json(categories);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ error: 'Server error' });
   }
 };

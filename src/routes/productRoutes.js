@@ -3,7 +3,6 @@ const router = express.Router();
 const { Product } = require('../models');
 const { Op } = require('sequelize');
 
-// Все продукты с фильтрацией
 router.get('/', async (req, res) => {
   try {
     const { categoryId, search } = req.query;
@@ -23,7 +22,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Избранные продукты
 router.get('/featured', async (req, res) => {
   try {
     const products = await Product.findAll({ where: { id: ['featured1', 'featured2', 'featured3', 'featured4'] } });
@@ -34,7 +32,6 @@ router.get('/featured', async (req, res) => {
   }
 });
 
-// Топ продукты
 router.get('/top', async (req, res) => {
   try {
     const products = await Product.findAll({ where: { id: ['top1', 'top2'] } });

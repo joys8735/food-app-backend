@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Product } = require('../models');
+const { Product, OptionGroup, OptionChoice } = require('../models');
 const { Op } = require('sequelize');
 
 router.get('/', async (req, res) => {
@@ -14,7 +14,14 @@ router.get('/', async (req, res) => {
         { description: { [Op.iLike]: `%${search}%` } }
       ];
     }
-    const products = await Product.findAll({ where });
+    const products = await Product.findAll({
+      where,
+      include: [{
+        model: OptionGroup,
+        as: 'options',
+        include: [{ model: OptionChoice, as: 'choices' }]
+      }]
+    });
     res.json(products);
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -24,7 +31,14 @@ router.get('/', async (req, res) => {
 
 router.get('/featured', async (req, res) => {
   try {
-    const products = await Product.findAll({ where: { id: ['featured1', 'featured2', 'featured3', 'featured4'] } });
+    const products = await Product.findAll({
+      where: { id: ['featured1', 'featured2', 'featured3', 'featured4'] },
+      include: [{
+        model: OptionGroup,
+        as: 'options',
+        include: [{ model: OptionChoice, as: 'choices' }]
+      }]
+    });
     res.json(products);
   } catch (error) {
     console.error('Error fetching featured products:', error);
@@ -34,7 +48,14 @@ router.get('/featured', async (req, res) => {
 
 router.get('/top', async (req, res) => {
   try {
-    const products = await Product.findAll({ where: { id: ['top1', 'top2'] } });
+    const products = await Product.findAll({
+      where: { id: ['top1', 'top2'] },
+      include: [{
+        model: OptionGroup,
+        as: 'options',
+        include: [{ model: OptionChoice, as: 'choices' }]
+      }]
+    });
     res.json(products);
   } catch (error) {
     console.error('Error fetching top products:', error);

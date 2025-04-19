@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       productId: {
         type: DataTypes.STRING,
         allowNull: false,
-        field: 'productId' // Явно указываем имя столбца
+        field: 'productId'
       },
       name: {
         type: DataTypes.STRING,

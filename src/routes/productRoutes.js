@@ -5,6 +5,7 @@ const { Op } = require('sequelize');
 
 router.get('/', async (req, res) => {
   try {
+    console.log('Fetching products with query:', req.query);
     const { categoryId, search } = req.query;
     const where = {};
     if (categoryId) where.categoryId = categoryId;
@@ -33,6 +34,7 @@ router.get('/', async (req, res) => {
 
 router.get('/featured', async (req, res) => {
   try {
+    console.log('Fetching featured products');
     const products = await Product.findAll({
       where: { id: ['featured1', 'featured2', 'featured3', 'featured4'] },
       include: [{
@@ -52,6 +54,7 @@ router.get('/featured', async (req, res) => {
 
 router.get('/top', async (req, res) => {
   try {
+    console.log('Fetching top products');
     const products = await Product.findAll({
       where: { id: ['top1', 'top2'] },
       include: [{

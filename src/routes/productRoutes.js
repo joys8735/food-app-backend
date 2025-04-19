@@ -19,7 +19,8 @@ router.get('/', async (req, res) => {
       include: [{
         model: OptionGroup,
         as: 'options',
-        include: [{ model: OptionChoice, as: 'choices' }]
+        required: false,
+        include: [{ model: OptionChoice, as: 'choices', required: false }]
       }]
     });
     res.json(products);
@@ -36,7 +37,8 @@ router.get('/featured', async (req, res) => {
       include: [{
         model: OptionGroup,
         as: 'options',
-        include: [{ model: OptionChoice, as: 'choices' }]
+        required: false,
+        include: [{ model: OptionChoice, as: 'choices', required: false }]
       }]
     });
     res.json(products);
@@ -53,7 +55,8 @@ router.get('/top', async (req, res) => {
       include: [{
         model: OptionGroup,
         as: 'options',
-        include: [{ model: OptionChoice, as: 'choices' }]
+        required: false,
+        include: [{ model: OptionChoice, as: 'choices', required: false }]
       }]
     });
     res.json(products);

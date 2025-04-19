@@ -12,7 +12,8 @@ app.use(cors({
     'http://localhost:8080',
     'http://localhost:5002',
     'http://localhost:4173',
-    'https://project-burger-two.vercel.app'
+    'https://project-burger-two.vercel.app',
+    'https://food-app-backend-production-c1bf.up.railway.app' // Замени на свой Railway-URL
   ] 
 }));
 app.use(express.json());
@@ -33,4 +34,4 @@ sequelize
   .catch(err => console.error('PostgreSQL connection error:', err));
 
 const PORT = process.env.PORT || 5002;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));

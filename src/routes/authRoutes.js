@@ -30,20 +30,27 @@ router.post('/telegram', async (req, res) => {
     const { id, first_name, username, photo_url, auth_date, hash } = req.body;
 
     if (!id || !auth_date || !hash) {
+      console.log('Missing required fields:', { id, auth_date, hash });
       return res.status(400).json({ error: 'Missing required Telegram data' });
     }
 
     if (!verifyTelegramData(req.body)) {
+      console.log('Invalid Telegram signature');
       return res.status(401).json({ error: 'Invalid Telegram data' });
     }
 
     let user = await User.findOne({ where: { telegramId: id.toString() } });
 
     if (!user) {
+      const userName = first_name || username || 'Telegram User';
+      if (!userName) {
+        console.log('No valid name provided');
+        return res.status(400).json({ error: 'Invalid username or first_name' });
+      }
       user = await User.create({
         id: uuidv4(),
         telegramId: id.toString(),
-        name: first_name || username || 'Telegram User',
+        name: userName,
         email: null,
         balance: 25.0,
         rewards: 150,

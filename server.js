@@ -32,7 +32,6 @@ app.use('/api/products', productRoutes);
 app.use('/api/product-options', productOptionRoutes);
 app.use('/api/auth', authRoutes);
 
-// Тестовый маршрут
 app.get('/api/test', (req, res) => {
   console.log('Accessed /api/test');
   res.json({ message: 'Server is running!' });

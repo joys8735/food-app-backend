@@ -5,7 +5,6 @@ const crypto = require('crypto');
 const { User } = require('../models');
 const { v4: uuidv4 } = require('uuid');
 
-// Тестовый маршрут для проверки /api/auth
 router.get('/test', (req, res) => {
   console.log('Accessed /api/auth/test');
   res.json({ message: 'Auth routes are working!' });

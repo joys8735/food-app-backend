@@ -5,8 +5,8 @@ const crypto = require('crypto');
 const { User } = require('../models');
 const { v4: uuidv4 } = require('uuid');
 
-// Проверка подписи Telegram
 function verifyTelegramData(data) {
+  console.log('Verifying Telegram data:', data);
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   if (!botToken) {
     throw new Error('TELEGRAM_BOT_TOKEN is not set');
@@ -20,15 +20,19 @@ function verifyTelegramData(data) {
   const computedHash = crypto.createHmac('sha256', secret)
     .update(dataCheckString)
     .digest('hex');
+  console.log('Computed hash:', computedHash, 'Received hash:', data.hash);
   return computedHash === data.hash;
 }
 
-// Telegram Auth
 router.post('/telegram', async (req, res) => {
   try {
+    console.log('Received Telegram auth request:', req.body);
     const { id, first_name, username, photo_url, auth_date, hash } = req.body;
 
-    // Проверяем подпись Telegram
+    if (!id || !auth_date || !hash) {
+      return res.status(400).json({ error: 'Missing required Telegram data' });
+    }
+
     if (!verifyTelegramData(req.body)) {
       return res.status(401).json({ error: 'Invalid Telegram data' });
     }
@@ -45,6 +49,9 @@ router.post('/telegram', async (req, res) => {
         rewards: 150,
         language: 'en'
       });
+      console.log('Created new user:', user.id);
+    } else {
+      console.log('Found existing user:', user.id);
     }
 
     const token = jwt.sign(
@@ -70,7 +77,6 @@ router.post('/telegram', async (req, res) => {
   }
 });
 
-// Get current user
 router.get('/user', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];

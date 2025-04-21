@@ -12,25 +12,7 @@ router.get('/test', (req, res) => {
 
 function verifyTelegramData(data) {
   console.log('Verifying Telegram data:', data);
-  return true; // Временно отключаем проверку подписи
-  /*
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  if (!botToken) {
-    throw new Error('TELEGRAM_BOT_TOKEN is not set');
-  }
-  const secret = crypto.createHash('sha256').update(botToken).digest();
-  const dataCheckString = Object.keys(data)
-    .filter(key => key !== 'hash')
-    .sort()
-    .map(key => `${key}=${data[key]}`)
-    .join('\n');
-  console.log('Data check string:', dataCheckString);
-  const computedHash = crypto.createHmac('sha256', secret)
-    .update(dataCheckString)
-    .digest('hex');
-  console.log('Computed hash:', computedHash, 'Received hash:', data.hash);
-  return computedHash === data.hash;
-  */
+  return true; // Временно отключаем проверку
 }
 
 router.post('/telegram', async (req, res) => {

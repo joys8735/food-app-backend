@@ -6,6 +6,7 @@ const Banner = require('./Banner')(sequelize, DataTypes);
 const Product = require('./Product')(sequelize, DataTypes);
 const OptionGroup = require('./OptionGroup')(sequelize, DataTypes);
 const OptionChoice = require('./OptionChoice')(sequelize, DataTypes);
+const User = require('./User')(sequelize, DataTypes);
 
 Product.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
 OptionGroup.belongsTo(Product, { foreignKey: 'productId', as: 'product' });
@@ -22,5 +23,6 @@ module.exports = {
   Banner,
   Product,
   OptionGroup,
-  OptionChoice
+  OptionChoice,
+  User
 };
